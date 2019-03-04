@@ -16,14 +16,14 @@
         android:layout_marginEnd="136dp"
         android:layout_marginBottom="80dp"
         android:background="@drawable/circle"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        android:onClick="magnify"
+        app:layout_constraintBottom_toTopOf="@+id/trackTitleTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:onClick="magnify"
         app:srcCompat="@drawable/note" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/trackTitleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="175dp"
@@ -59,6 +59,7 @@
         android:layout_marginBottom="37dp"
         android:background="@drawable/circle"
         android:scaleType="centerCrop"
+        android:onClick="play"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,10 +69,10 @@
         android:id="@+id/prevButton"
         android:layout_width="70dp"
         android:layout_height="70dp"
-
         android:layout_marginEnd="50dp"
         android:layout_marginBottom="36dp"
         android:background="@drawable/circle"
+        android:onClick="previous"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/playButton"
@@ -81,15 +82,14 @@
         android:id="@+id/nextButton"
         android:layout_width="70dp"
         android:layout_height="70dp"
-
         android:layout_marginStart="50dp"
         android:layout_marginBottom="36dp"
         android:background="@drawable/circle"
+        android:onClick="next"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/playButton"
         app:srcCompat="@drawable/next_arrow" />
-
 
 
 </android.support.constraint.ConstraintLayout>
