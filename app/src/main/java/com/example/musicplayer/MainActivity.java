@@ -11,9 +11,14 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.Toolbar;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class MainActivity extends AppCompatActivity {
     MediaPlayer mediaPlayer;
     ImageButton playPauseButton;
+    SeekBar seekBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +26,32 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.monetochka90);
         playPauseButton = findViewById(R.id.playButton);
+        seekBar = findViewById(R.id.seekBar);
+        seekBar.setMax(mediaPlayer.getDuration());
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if(fromUser){
+                    mediaPlayer.seekTo(progress);
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+        new Timer().scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                seekBar.setProgress(mediaPlayer.getCurrentPosition());
+            }
+        }, 0, 1000);
 
     }
 
@@ -31,16 +62,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void previous(View view) {
+        mediaPlayer.seekTo(0);
+        seekBar.setProgress(0);
+        mediaPlayer.pause();
+        playPauseButton.setImageResource(R.drawable.play_arrow);
     }
 
     public void next(View view) {
+        mediaPlayer.seekTo(mediaPlayer.getDuration());
+        seekBar.setProgress(mediaPlayer.getDuration());
+        playPauseButton.setImageResource(R.drawable.play_arrow);
     }
 
     public void play(View view) {
         if (mediaPlayer.isPlaying()) {
             mediaPlayer.pause();
             playPauseButton.setImageResource(R.drawable.play_arrow);
-        }else {
+        } else {
             mediaPlayer.start();
             playPauseButton.setImageResource(R.drawable.pause);
         }
